@@ -21,25 +21,36 @@ def search(inpt):
     matches=[value for key,value in matrix_dict.items() if inpt in key]
     return matches   
 
-usr_inpt=input("Enter Movie Name : ").lower()
-matches=search(usr_inpt)
-result=[]
+user_inpt=input("Enter Movie Name : ").lower()
 
-if len(matches)==1:
-   result=recommend(matches[0])
-elif len(matches)==0:
-  print("movie not found")
+#recommend_movie function
+def recommend_movie(usr_inpt):
+  matches=search(usr_inpt)
+  
+  if len(matches)==0:
+    return []
+  elif len(matches)==1:
+    return recommend(matches[0])
+  else:
+    print("Choose one from below :")
+    for i in range(len(matches)):
+      print(i+1,matches[i])
+    while True:
+       choice=int(input("\nenter the choice : ")) 
+       if 1<=choice<=len(matches):
+         break
+       print("Invalid Choice. Try again")
+    return recommend(matches[choice-1])
+
+result=recommend_movie(user_inpt)
+
+if len(result)==0:
+  print("\nmovie not found")
 else:
-  print("Choose one from below :")
-  for i in range(len(matches)):
-    print(i+1,matches[i])
-  selected_indx=int(input("\nenter the choice : ")) 
-  result=recommend(matches[selected_indx-1])
-
-print("\n Recommended Movies:\n")
+  print("\n Recommended Movies:\n")
  
-for name,score in result:
-    print("Name : ",name,"    score : ", score)
+  for name,score in result:
+     print(f"{name}  |    Similarity: {score:.4f}")
     
 
   
