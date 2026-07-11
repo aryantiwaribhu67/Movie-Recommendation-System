@@ -65,6 +65,5 @@ print(similarity.shape)
 print("done")
 joblib.dump(similarity,"models/similarity.joblib")
 joblib.dump(movie_matrix,"models/movie_matrix.joblib")
-joblib.dump(movie_titles,"models/movie_titles.joblib")
 print("models saved successfully")
 
