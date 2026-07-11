@@ -1,4 +1,5 @@
 myenv/
 __pycache__/
 models/
+tmdb.py
 .env
