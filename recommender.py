@@ -1,6 +1,17 @@
 import joblib
+import pandas as pd
+from tmdb import get_movie_details
+
 movie_matrix=joblib.load("models/movie_matrix.joblib")
 similarity=joblib.load("models/similarity.joblib")
+
+movies=pd.read_csv("data/movies.csv")
+movies=movies.dropna()
+movies=movies.drop_duplicates()
+links=pd.read_csv("data/links.csv")
+links=links.dropna()
+links=links.drop_duplicates()
+merged=pd.merge(movies,links,on="movieId")
 matrix_titles=movie_matrix.index
 matrix_dict={i.lower():i for i in matrix_titles}
 
@@ -28,6 +39,16 @@ def search(inpt):
 #recommend_movie function
 def recommend_movies(movie_name):
     return recommend(movie_name)
+    
+def get_tmdb_id(movie_name):
+    result=merged[merged["title"]==movie_name]["tmdbId"]
+    
+    if result.empty:
+      return None
+    else:
+      return result.iloc[0]
+
+
 
     
 
