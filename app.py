@@ -37,10 +37,7 @@ if st.button("🎯 Recommend Movies"):
        else:
          details=None
        with st.container():
-          #  st.subheader(f"🎬 {name}")
-           # st.progress(score)
-          #  st.write(f"⭐ Similarity: {score*100:.2f}%")
-           # st.divider()
+          
          col1,col2=st.columns([1,3])
            
          if details:  
